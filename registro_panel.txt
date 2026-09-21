@@ -1,0 +1,24 @@
+REGISTRO DE CONSTRUCCION DEL PANEL
+Generado: 2026-09-06 21:13
+
+Fuentes:
+  cobre  Cochilco, Precio del cobre refinado mensual, columna BML (cUS$/lb),
+         nominal. Archivo historico actualizado al ano 2024.
+  usdclp Banco Central de Chile, F073.TCO.PRE.HIST.M, promedio mensual.
+  tpm    Banco Central de Chile, F022.TPM.TIN.D001.NO.Z.M, promedio simple.
+
+Convencion de agregacion: las tres series son promedios mensuales.
+La de usdclp fue verificada por doble via contra la serie diaria
+(ver cobertura_bcch.txt).
+
+Dimensiones: 264 meses x 3 series
+Ventana: 2003-01 a 2024-12
+Valores faltantes: 0
+
+Transformaciones para el analisis en diferencias:
+  cobre, usdclp -> diferencia de logaritmos (retornos)
+  tpm           -> diferencia simple (ya expresada en puntos porcentuales)
+
+Entorno de calculo:
+  python 3.12.0  numpy 2.2.5  pandas 2.2.3
+  statsmodels 0.14.4  scipy 1.15.3
