@@ -10,14 +10,14 @@ Este repositorio respalda el informe final: contiene el código, los datos públ
 ## Estructura
 
 ```
-/                      cuadernos, datos y registros de trazabilidad (§4 y §5.2.2–5.3)
+/cuadernos/            cuadernos Jupyter con sus datos de entrada y registros de trazabilidad
 /codigo/               todos los guiones y módulos de Python (una sola copia de cada uno)
-/resultados/<sección>/ archivos de resultados, ordenados por la sección del informe que los reporta
+/resultados/<sección>/ tablas y archivos de resultados, ordenados por la sección del informe que los reporta
 ```
 
-Los cuadernos y los datos quedan en la raíz porque los cuadernos buscan sus archivos en su misma carpeta. Los guiones están juntos en `codigo/` porque se importan entre sí. Para ejecutarlos, se corren desde la raíz con `python codigo/<guion>.py` y se les pasa la ruta del panel como argumento.
+Los cuadernos y sus datos de entrada comparten la carpeta `cuadernos/` porque los cuadernos buscan sus archivos en el directorio de trabajo (`Path.cwd()`). Hay que abrirlos o ejecutarlos desde esa carpeta. Las tablas que producen están en `resultados/`; si se vuelven a ejecutar, los cuadernos las escriben de nuevo en `cuadernos/`. Los guiones están juntos en `codigo/` porque se importan entre sí. Para ejecutarlos, se corren desde la raíz con `python codigo/<guion>.py` y se les pasa la ruta del panel (`cuadernos/panel_2003_2024.csv`) como argumento.
 
-### Raíz: datos y cuadernos
+### `cuadernos/`: cuadernos y datos de entrada
 
 | Archivo | Sección | Contenido |
 |---|---|---|
@@ -26,10 +26,8 @@ Los cuadernos y los datos quedan en la raíz porque los cuadernos buscan sus arc
 | `panel_bcch_2003_2024.csv` | §4.1 | Banco Central de Chile, API de la Base de Datos Estadísticos. |
 | `verificacion_agregacion.csv` | §4.1 | Serie mensual oficial frente a la agregación de la serie diaria. |
 | `panel_2003_2024.csv` | §4.3 | Panel final: 264 meses × 3 series. |
-| `tabla_descriptivos.csv`, `tabla_estacionariedad.csv`, `tabla_correlaciones.csv`, `tabla_granger.csv` | §4.3 | Tablas 3 a 6. |
 | `cobertura_bcch.txt`, `registro_panel.txt` | §4.5 | Registros de trazabilidad. |
 | `MIA_Evaluacion_LineasBase.ipynb` | §5.2.2, §5.3 | Ventana expansiva, CRPS, Energy Score y Diebold–Mariano de las líneas base. Su última celda exporta `es_lineabase_por_origen.npz`. |
-| `resultados_random_walk.csv`, `resultados_arima_garch.csv`, `tabla_baselines.csv`, `tabla_dm_baselines.csv` | §5.2.2, §5.3 | Tablas 10 y 19. |
 | `MIA_Parte1_GeneradorSistemaEconomico.ipynb` | §5.2.1 | Generador sintético GARCH + ARIMA, el primero de los dos. |
 | `MIA_VersionA_Diagnostico.ipynb`, `MIA_VersionB_RegularizacionRG.ipynb` | §5.2.1 (Tabla 9) | **Cuadernos de desarrollo**, con término variacional y η = 5. Sus valores de L_simple no son comparables con los de §5 (ver §3.2.2). |
 | `CRPS_GARCH.ipynb` | — | Desarrollo del CRPS por muestras. |
@@ -38,7 +36,8 @@ Los cuadernos y los datos quedan en la raíz porque los cuadernos buscan sus arc
 
 | Sección | Guiones (`codigo/`) | Resultados (`resultados/`) |
 |---|---|---|
-| **§5.1–5.3** Protocolo y líneas base | `evaluacion.py`, `arima_garch.py` | (en la raíz) |
+| **§4.3** Estadísticas del panel (Tablas 3–6) | `cuadernos/MIA_Construccion_Panel.ipynb` | `4.3/tabla_descriptivos.csv`, `4.3/tabla_estacionariedad.csv`, `4.3/tabla_correlaciones.csv`, `4.3/tabla_granger.csv` |
+| **§5.1–5.3** Protocolo y líneas base (Tablas 10 y 19) | `cuadernos/MIA_Evaluacion_LineasBase.ipynb`, `evaluacion.py`, `arima_garch.py` | `5.2.2/resultados_random_walk.csv`, `5.2.2/resultados_arima_garch.csv`, `5.2.2/tabla_baselines.csv`, `5.2.2/tabla_dm_baselines.csv` |
 | **§5.2.3** Contraste de H1 (Tablas 11–13) | `h1_sintetico.py`, `h1_real.py`, `bloques_h1.py`, `cabeza_r0.py`, `h1_harness.py`, `rg_frobenius.py`, `run_h1.py` | `5.2.3/h1_sintetico_full_2026-10-11.json`, `5.2.3/h1_real_full_2026-10-11.json` |
 | **§5.2.4** Objetivo de entrenamiento (Tablas 14–15) | `condicionante_real.py`, `dm_objetivo.py`, `diag_difusion.py`, `diag_calibracion.py`, `diag_calibracion2.py`, `diag_encoder.py`, `diag_pooling.py`, `diag_horizonte.py`, `cabeza_difusion.py` | `5.2.4/*` |
 | **§5.2.5** H2 y auditoría de la línea base (Tablas 16–17) | `h2_cabezas.py`, `dm_h2.py`, `es_escala.py`, `exportar_es_lineabase.py`, `verificar_psi_lineabase.py`, `recalcular_es_lineabase.py` | `5.2.5/*` |
@@ -53,36 +52,36 @@ Los cuadernos y los datos quedan en la raíz porque los cuadernos buscan sus arc
 ```
 pip install -r requirements.txt
 
-# §4 y §5.2.2–5.3: abrir y ejecutar los cuadernos de la raíz, en orden
+# §4 y §5.2.2–5.3: abrir y ejecutar los cuadernos de cuadernos/, en orden y desde esa carpeta
 #   1. MIA_Construccion_Panel.ipynb   (reutiliza los archivos descargados; no requiere credenciales)
 #   2. MIA_Evaluacion_LineasBase.ipynb
 
 # §5.2.3
 python codigo/h1_sintetico.py
-python codigo/h1_real.py panel_2003_2024.csv
+python codigo/h1_real.py cuadernos/panel_2003_2024.csv
 
 # §A.3
-python codigo/medir_frac_real.py --panel panel_2003_2024.csv
+python codigo/medir_frac_real.py --panel cuadernos/panel_2003_2024.csv
 python codigo/eta_sensibilidad.py
-python codigo/eta_sensibilidad.py --panel panel_2003_2024.csv
+python codigo/eta_sensibilidad.py --panel cuadernos/panel_2003_2024.csv
 
 # §5.2.4
-python codigo/condicionante_real.py --panel panel_2003_2024.csv --objetivo nivel
-python codigo/condicionante_real.py --panel panel_2003_2024.csv --objetivo cambio
+python codigo/condicionante_real.py --panel cuadernos/panel_2003_2024.csv --objetivo nivel
+python codigo/condicionante_real.py --panel cuadernos/panel_2003_2024.csv --objetivo cambio
 python codigo/dm_objetivo.py <salida_nivel>.json <salida_cambio>.json
 python codigo/diag_difusion.py            # y los demás diag_*.py, sobre el generador sintético
 
 # §5.2.5
-python codigo/h2_cabezas.py --panel panel_2003_2024.csv
-python codigo/dm_h2.py h2_real.json es_lineabase_por_origen.npz
-python codigo/verificar_psi_lineabase.py --panel panel_2003_2024.csv
-python codigo/recalcular_es_lineabase.py --panel panel_2003_2024.csv
+python codigo/h2_cabezas.py --panel cuadernos/panel_2003_2024.csv
+python codigo/dm_h2.py resultados/5.2.5/h2_real.json resultados/5.2.5/es_lineabase_por_origen.npz
+python codigo/verificar_psi_lineabase.py --panel cuadernos/panel_2003_2024.csv
+python codigo/recalcular_es_lineabase.py --panel cuadernos/panel_2003_2024.csv
 
 # §5.2.6 y §A.4
-python codigo/recontraste_h1_cambio.py --panel panel_2003_2024.csv
+python codigo/recontraste_h1_cambio.py --panel cuadernos/panel_2003_2024.csv
 
 # §5.4
-python codigo/lineas_neuronales.py --panel panel_2003_2024.csv
+python codigo/lineas_neuronales.py --panel cuadernos/panel_2003_2024.csv
 ```
 
 Los guiones escriben sus resultados en la carpeta desde la que se ejecutan. Los de `resultados/` son los que produjeron las cifras del informe.
