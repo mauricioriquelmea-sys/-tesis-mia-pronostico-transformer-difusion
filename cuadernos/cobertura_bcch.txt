@@ -1,0 +1,16 @@
+REGISTRO DE DESCARGA - API BDE Banco Central de Chile
+Fecha de descarga : 2026-09-06 20:15
+Ventana solicitada: 2003-01-01 a 2024-12-31
+
+Series:
+  usdclp   F073.TCO.PRE.HIST.M
+           Tipo de cambio del dólar observado diario, serie histórica
+  tpm      F022.TPM.TIN.D001.NO.Z.M
+           Tasa de política monetaria (promedio simple) - TPM
+
+Verificacion de agregacion (serie mensual de tipo de cambio):
+  Error absoluto medio vs promedio del mes : 0.000531 CLP
+  Error absoluto medio vs cierre del mes   : 10.125364 CLP
+  Conclusion: La serie mensual oficial es el PROMEDIO del mes.
+
+Dimensiones del panel: 264 meses x 2 series
