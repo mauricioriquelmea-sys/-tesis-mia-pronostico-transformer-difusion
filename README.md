@@ -1,94 +1,108 @@
-# Pronóstico probabilístico multivariado con Transformer–Difusión
-
-**Extensión de regularización estructural informada por dominio**
+# Forecasting probabilístico multivariado con Transformer–Difusión y regularización estructural informada por dominio
 
 Tesis del Magíster en Inteligencia Artificial, Pontificia Universidad Católica de Chile (INF4980).
-Autor: Mauricio Riquelme Alvarado · Profesor guía: Marcelo Mendoza.
+Autor: Mauricio Riquelme Alvarado · Profesor supervisor: Marcelo Mendoza.
+
+Este repositorio respalda el informe final: contiene el código, los datos públicos y los archivos de resultados de cada tabla. Cada cifra del informe se puede rastrear hasta el guion que la produjo y el archivo donde quedó registrada.
 
 ---
 
-## Descripción
+## Estructura
 
-Este repositorio contiene el código y los datos del proyecto de tesis, cuyo objetivo es pronosticar la **distribución conjunta** de tres series macro-financieras chilenas —precio del cobre, tipo de cambio USD/CLP y Tasa de Política Monetaria (TPM)— con datos mensuales 2003–2024.
+```
+/                      cuadernos, datos y registros de trazabilidad (§4 y §5.2.2–5.3)
+/codigo/               todos los guiones y módulos de Python (una sola copia de cada uno)
+/resultados/<sección>/ archivos de resultados, ordenados por la sección del informe que los reporta
+```
 
-La propuesta es una arquitectura híbrida Transformer–Difusión que incorpora conocimiento económico de dominio como una regularización explícita sobre los mapas de atención del modelo. La hipótesis estructural es una cadena de dependencia Cu → USD/CLP → TPM, inyectada como una penalización suave en la función de pérdida, de modo que los datos puedan corregirla si resulta mal especificada.
+Los cuadernos y los datos quedan en la raíz porque los cuadernos buscan sus archivos en su misma carpeta. Los guiones están juntos en `codigo/` porque se importan entre sí. Para ejecutarlos, se corren desde la raíz con `python codigo/<guion>.py` y se les pasa la ruta del panel como argumento.
 
-## Estado
+### Raíz: datos y cuadernos
 
-Corresponde al **Informe de Avance N.º 3**. Incluye el panel de datos real verificado, el protocolo de evaluación probabilística y dos líneas base evaluadas (*random walk* y ARIMA/GARCH). Las Versiones A y B del modelo propuesto aún no han sido evaluadas sobre el panel real: requieren la cabeza de difusión condicional, en desarrollo.
+| Archivo | Sección | Contenido |
+|---|---|---|
+| `MIA_Construccion_Panel.ipynb` | §4 | Descarga, verificación de la convención de agregación, pruebas ADF, correlaciones, Granger y figuras. |
+| `Precios-del-Cobre-Refinado-Mensual.xlsx` | §4.1 | Cochilco, archivo histórico. |
+| `panel_bcch_2003_2024.csv` | §4.1 | Banco Central de Chile, API de la Base de Datos Estadísticos. |
+| `verificacion_agregacion.csv` | §4.1 | Serie mensual oficial frente a la agregación de la serie diaria. |
+| `panel_2003_2024.csv` | §4.3 | Panel final: 264 meses × 3 series. |
+| `tabla_descriptivos.csv`, `tabla_estacionariedad.csv`, `tabla_correlaciones.csv`, `tabla_granger.csv` | §4.3 | Tablas 3 a 6. |
+| `cobertura_bcch.txt`, `registro_panel.txt` | §4.5 | Registros de trazabilidad. |
+| `MIA_Evaluacion_LineasBase.ipynb` | §5.2.2, §5.3 | Ventana expansiva, CRPS, Energy Score y Diebold–Mariano de las líneas base. Su última celda exporta `es_lineabase_por_origen.npz`. |
+| `resultados_random_walk.csv`, `resultados_arima_garch.csv`, `tabla_baselines.csv`, `tabla_dm_baselines.csv` | §5.2.2, §5.3 | Tablas 10 y 19. |
+| `MIA_Parte1_GeneradorSistemaEconomico.ipynb` | §5.2.1 | Generador sintético GARCH + ARIMA, el primero de los dos. |
+| `MIA_VersionA_Diagnostico.ipynb`, `MIA_VersionB_RegularizacionRG.ipynb` | §5.2.1 (Tabla 9) | **Cuadernos de desarrollo**, con término variacional y η = 5. Sus valores de L_simple no son comparables con los de §5 (ver §3.2.2). |
+| `CRPS_GARCH.ipynb` | — | Desarrollo del CRPS por muestras. |
 
-## Contenido
+### Índice por sección del informe
 
-### Cuadernos
-
-| Archivo | Contenido |
-|---|---|
-| `MIA_Construccion_Panel.ipynb` | Construcción y caracterización del panel: descarga, verificación de la convención de agregación, pruebas ADF, correlaciones, causalidad de Granger y figuras. Corresponde a la Sección 4 del informe. |
-| `MIA_Evaluacion_LineasBase.ipynb` | Protocolo de ventana expansiva, reglas de puntuación (CRPS y *Energy Score*), prueba de Diebold–Mariano y evaluación de las líneas base. Corresponde a la Sección 5. |
-| `MIA_Parte1_GeneradorSistemaEconomico.ipynb` | Generador de un sistema económico sintético con causalidad controlada, empleado para verificar el mecanismo de inyección del *prior*. |
-| `MIA_VersionA_Diagnostico.ipynb` | Modelo base (Versión A): tokenización multivariada, *encoder* Transformer causal y diagnóstico de la atención. |
-| `MIA_VersionB_RegularizacionRG.ipynb` | Extensión con regularización estructural (Versión B) y barrido del peso de la penalización. |
-| `CRPS_GARCH.ipynb` | Cálculo del CRPS por muestras. |
-
-### Módulos
-
-| Archivo | Contenido |
-|---|---|
-| `evaluacion.py` | Implementación de referencia del protocolo de evaluación y de las métricas. |
-| `arima_garch.py` | Línea base ARIMA/GARCH conectada al módulo de evaluación. |
-
-### Datos
-
-| Archivo | Origen |
-|---|---|
-| `Precios-del-Cobre-Refinado-Mensual.xlsx` | Cochilco, archivo histórico de precios de metales. |
-| `panel_bcch_2003_2024.csv` | Banco Central de Chile, API de la Base de Datos Estadísticos. |
-| `verificacion_agregacion.csv` | Contraste entre la serie mensual oficial y la agregación de la serie diaria. |
-| `panel_2003_2024.csv` | Panel final: 264 meses × 3 series, sin valores faltantes. |
-
-### Resultados y trazabilidad
-
-Tablas de la Sección 4 (`tabla_descriptivos.csv`, `tabla_estacionariedad.csv`, `tabla_correlaciones.csv`, `tabla_granger.csv`), resultados de las líneas base (`resultados_random_walk.csv`, `resultados_arima_garch.csv`) y dos registros de trazabilidad:
-
-- `cobertura_bcch.txt` documenta la descarga desde el Banco Central, los códigos de serie con sus títulos oficiales y la verificación de la convención de agregación.
-- `registro_panel.txt` documenta las transformaciones aplicadas, las dimensiones del panel y las versiones exactas del entorno de cómputo.
+| Sección | Guiones (`codigo/`) | Resultados (`resultados/`) |
+|---|---|---|
+| **§5.1–5.3** Protocolo y líneas base | `evaluacion.py`, `arima_garch.py` | (en la raíz) |
+| **§5.2.3** Contraste de H1 (Tablas 11–13) | `h1_sintetico.py`, `h1_real.py`, `bloques_h1.py`, `cabeza_r0.py`, `h1_harness.py`, `rg_frobenius.py`, `run_h1.py` | `5.2.3/h1_sintetico_full_2026-10-11.json`, `5.2.3/h1_real_full_2026-10-11.json` |
+| **§5.2.4** Objetivo de entrenamiento (Tablas 14–15) | `condicionante_real.py`, `dm_objetivo.py`, `diag_difusion.py`, `diag_calibracion.py`, `diag_calibracion2.py`, `diag_encoder.py`, `diag_pooling.py`, `diag_horizonte.py`, `cabeza_difusion.py` | `5.2.4/*` |
+| **§5.2.5** H2 y auditoría de la línea base (Tablas 16–17) | `h2_cabezas.py`, `dm_h2.py`, `es_escala.py`, `exportar_es_lineabase.py`, `verificar_psi_lineabase.py`, `recalcular_es_lineabase.py` | `5.2.5/*` |
+| **§5.2.6 y §A.4** Re-contraste de H1 (Tabla 18) | `recontraste_h1_cambio.py` | `5.2.6/recontraste_h1_cambio_FASE1_2026-10-14.json`, `5.2.6/recontraste_h1_cambio_full_2026-10-14.json` |
+| **§5.4** Codificadores (Tabla 20) | `lineas_neuronales.py` | `5.4/neuronales_real_cambio_full_2026-10-13.json` |
+| **§6.2.2** Escalera de verificación de la difusión | `diag_difusion.py` (criterio C1) y `cabeza_difusion.py` (`schedule_coseno`) | `5.2.4/diag_difusion_full_2026-10-12.json` |
+| **§A.1** Prerregistro | — | `A.1/PREREGISTRO_H1.md` |
+| **§A.3** Fuerza del prior | `medir_frac_real.py`, `eta_sensibilidad.py` | `A.3/eta_sensibilidad_real_full_2026-10-14.json`, `A.3/eta_sensibilidad_sintetico_full_2026-10-14.json` |
 
 ## Ejecución
 
-### Requisitos
-
 ```
 pip install -r requirements.txt
+
+# §4 y §5.2.2–5.3: abrir y ejecutar los cuadernos de la raíz, en orden
+#   1. MIA_Construccion_Panel.ipynb   (reutiliza los archivos descargados; no requiere credenciales)
+#   2. MIA_Evaluacion_LineasBase.ipynb
+
+# §5.2.3
+python codigo/h1_sintetico.py
+python codigo/h1_real.py panel_2003_2024.csv
+
+# §A.3
+python codigo/medir_frac_real.py --panel panel_2003_2024.csv
+python codigo/eta_sensibilidad.py
+python codigo/eta_sensibilidad.py --panel panel_2003_2024.csv
+
+# §5.2.4
+python codigo/condicionante_real.py --panel panel_2003_2024.csv --objetivo nivel
+python codigo/condicionante_real.py --panel panel_2003_2024.csv --objetivo cambio
+python codigo/dm_objetivo.py <salida_nivel>.json <salida_cambio>.json
+python codigo/diag_difusion.py            # y los demás diag_*.py, sobre el generador sintético
+
+# §5.2.5
+python codigo/h2_cabezas.py --panel panel_2003_2024.csv
+python codigo/dm_h2.py h2_real.json es_lineabase_por_origen.npz
+python codigo/verificar_psi_lineabase.py --panel panel_2003_2024.csv
+python codigo/recalcular_es_lineabase.py --panel panel_2003_2024.csv
+
+# §5.2.6 y §A.4
+python codigo/recontraste_h1_cambio.py --panel panel_2003_2024.csv
+
+# §5.4
+python codigo/lineas_neuronales.py --panel panel_2003_2024.csv
 ```
 
-Las pruebas estadísticas dependen de la implementación de las bibliotecas, en particular la selección automática de rezagos. `requirements.txt` fija las versiones empleadas para producir los resultados reportados.
+Los guiones escriben sus resultados en la carpeta desde la que se ejecutan. Los de `resultados/` son los que produjeron las cifras del informe.
 
-### Orden
+Entorno de los contrastes: Python 3.12.0, PyTorch 2.14.1+cpu, NumPy 2.2.5, Windows 10 y `torch.set_num_threads(1)`. El barrido de §A.3 se ejecutó con 4 hilos. Los resultados obtenidos en entornos distintos no se combinan entre sí (§5.2.3).
 
-1. **`MIA_Construccion_Panel.ipynb`** produce `panel_2003_2024.csv` y las tablas de la Sección 4.
-2. **`MIA_Evaluacion_LineasBase.ipynb`** consume ese panel y produce los resultados de la Sección 5.
+## Notas de trazabilidad
 
-Los cuadernos buscan sus archivos en la misma carpeta en que se encuentran. Deben ejecutarse desde la raíz del repositorio, sin reorganizar los archivos en subcarpetas.
-
-### Credenciales y caché
-
-La descarga desde el Banco Central requiere credenciales personales de la API, leídas desde un archivo `credenciales.txt` que **no forma parte del repositorio** (dos líneas: correo y clave). Las credenciales se obtienen registrándose en la Base de Datos Estadísticos y activando el acceso a la API desde el perfil de usuario.
-
-No son necesarias para reproducir los resultados: el cuaderno de construcción del panel verifica primero si existen los archivos descargados y, en ese caso, los reutiliza. Con los CSV incluidos en este repositorio, todos los cuadernos se ejecutan sin acceso a la API.
-
-## Reproducibilidad
-
-El pipeline fue ejecutado en dos entornos independientes, con una discrepancia máxima del orden de 10⁻¹³ entre los resultados, atribuible a aritmética de punto flotante.
-
-La convención de agregación mensual de las series no se asumió: se determinó empíricamente contrastando la serie mensual oficial con la agregación de la serie diaria. Las tres series corresponden a promedios mensuales.
+- **R_G ejecutado frente al prerregistrado.** Los contrastes usan la función `R_G` de `bloques_h1.py`, no `rg_frobenius.py`. La proyección T×T → N×N es idéntica. La escala difiere en un factor constante: el R_G de `rg_frobenius.py` es exactamente 3 veces el de `bloques_h1.py`, porque uno promedia sobre las 9 entradas y el otro suma por fila y promedia sobre filas. Los valores de η del informe están en la escala de `bloques_h1.py`. Las fracciones estructurales no dependen de ese factor.
+- **`run_h1.py`** es la plantilla con calibración de η que, según documenta §A.3, nunca se ejecutó. Se publica tal cual, como evidencia de la desviación.
+- **Re-contraste en dos fases.** `recontraste_h1_cambio.py` escribe el archivo de la FASE 1, con el umbral fijado en 7,26 %, antes de comparar ningún CRPS. Ambos archivos llevan en el campo `timestamp` la hora de inicio de la ejecución. El orden entre las fases lo garantiza la estructura del guion: la FASE 2 no corre si la FASE 1 falla.
+- **Fechas de los prerregistros.** Los prerregistros se fijaron en las fechas indicadas en el Anexo A. Las fechas de los commits de este repositorio son las de publicación y no prueban la fecha de fijación.
 
 ## Fuentes de datos
 
 - **Comisión Chilena del Cobre (Cochilco).** Precio del cobre refinado, Bolsa de Metales de Londres, nominal, en centavos de dólar por libra.
-- **Banco Central de Chile.** Base de Datos Estadísticos. Tipo de cambio del dólar observado (`F073.TCO.PRE.HIST.M`) y Tasa de Política Monetaria (`F022.TPM.TIN.D001.NO.Z.M`).
+- **Banco Central de Chile.** Base de Datos Estadísticos: dólar observado (`F073.TCO.PRE.HIST.M`) y Tasa de Política Monetaria (`F022.TPM.TIN.D001.NO.Z.M`).
 
-Los datos provienen de fuentes públicas y oficiales, y pertenecen a sus respectivas instituciones. Se incluyen en este repositorio únicamente para permitir la reproducción de los resultados.
+Los datos son públicos y pertenecen a sus instituciones. Se incluyen solo para permitir la reproducción de los resultados.
 
 ## Uso
 
-El código se publica con fines académicos, como respaldo de la tesis. Para citarlo o reutilizarlo, contactar al autor.
+El código se publica con fines académicos, como respaldo de la tesis.
