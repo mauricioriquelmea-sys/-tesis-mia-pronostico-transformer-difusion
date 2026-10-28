@@ -1,0 +1,13 @@
+serie,h,dif_media,DM,p,mejor
+cobre,1,-2.6039,-4.424,0.0,ARIMA/GARCH
+cobre,3,-4.4327,-2.924,0.0042,ARIMA/GARCH
+cobre,6,-5.1588,-2.397,0.0182,ARIMA/GARCH
+cobre,12,-1.9798,-0.966,0.3364,sin dif.
+usdclp,1,-1.5545,-2.769,0.0066,ARIMA/GARCH
+usdclp,3,-1.3193,-1.129,0.2612,sin dif.
+usdclp,6,-0.9883,-0.67,0.5044,sin dif.
+usdclp,12,-0.6019,-0.35,0.7272,sin dif.
+tpm,1,-0.0419,-2.094,0.0386,ARIMA/GARCH
+tpm,3,-0.072,-1.046,0.298,sin dif.
+tpm,6,-0.0167,-0.138,0.8905,sin dif.
+tpm,12,0.1116,0.686,0.4945,sin dif.
