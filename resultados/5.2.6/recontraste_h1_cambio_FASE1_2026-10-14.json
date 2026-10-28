@@ -1,0 +1,71 @@
+{
+  "timestamp": "2026-10-14T15:40:26",
+  "entorno": {
+    "python": "3.12.0",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.2.5",
+    "plataforma": "Windows-10-10.0.19045-SP0",
+    "hilos": 1
+  },
+  "panel": "real",
+  "configuracion_reducida": false,
+  "T0": 143,
+  "n_origenes": 109,
+  "M": 200,
+  "pasos": 400,
+  "semillas": [
+    0,
+    1,
+    2
+  ],
+  "objetivo": "cambio",
+  "cabeza": "student-t",
+  "frac_objetivo": 0.2,
+  "umbral_comprometido": 0.06,
+  "nota": "re-contraste prerregistrado en el anexo A.4; experimento NUEVO, no sustituye al contraste bajo objetivo en niveles",
+  "semilla_detalle": {},
+  "etas": {
+    "0": 76.3573295022747,
+    "1": 79.34802584985327,
+    "2": 72.00031224917592
+  },
+  "fase1_potencia": {
+    "mde_por_semilla": {
+      "0": {
+        "n": 109,
+        "nw_lag": 11,
+        "var_hac": 0.9722280139290416,
+        "corr_hln": 0.8944836508283379,
+        "t_crit": 1.6590851435825054,
+        "dbar_min": 0.17517296613828795,
+        "crps_a": 2.5507700396875697,
+        "mde": 0.06867454275091923
+      },
+      "1": {
+        "n": 109,
+        "nw_lag": 11,
+        "var_hac": 1.2824478396055445,
+        "corr_hln": 0.8944836508283379,
+        "t_crit": 1.6590851435825054,
+        "dbar_min": 0.20118837069214512,
+        "crps_a": 2.521811817975295,
+        "mde": 0.07977929568657294
+      },
+      "2": {
+        "n": 109,
+        "nw_lag": 11,
+        "var_hac": 1.1267562183025677,
+        "corr_hln": 0.8944836508283379,
+        "t_crit": 1.6590851435825054,
+        "dbar_min": 0.18858102857086453,
+        "crps_a": 2.5973686449904982,
+        "mde": 0.07260464506437221
+      }
+    },
+    "mde_mediana": 0.07260464506437221,
+    "umbral_comprometido": 0.06,
+    "umbral_fijado": 0.07260464506437221,
+    "umbral_elevado": true,
+    "regla_agregacion": "media entre semillas; conteo descriptivo (anexo A.5)"
+  }
+}

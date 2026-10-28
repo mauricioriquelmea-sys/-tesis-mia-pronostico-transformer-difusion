@@ -1,0 +1,65 @@
+{
+  "timestamp": "2026-10-12T21:58:12",
+  "entorno": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "numpy": "2.5.3",
+    "plataforma": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
+    "hilos": 1
+  },
+  "config": {
+    "T_PANEL": 300,
+    "T0": 144,
+    "N_ORIGENES": 36,
+    "M": 200,
+    "REFIT": 12,
+    "STEPS": 400,
+    "T_DIF": 100,
+    "PASOS_MUESTREO": null,
+    "SEMILLAS": [
+      0,
+      1,
+      2
+    ]
+  },
+  "criterios": {
+    "c3": {
+      "R0-G": {
+        "crps": 2.919278698123009,
+        "cobertura_90": 0.3109567901234568,
+        "segundos": 68.9
+      },
+      "y": {
+        "crps": 2.924891496684658,
+        "cobertura_90": 0.9953703703703703,
+        "crps_vs_R0": 0.0019226662275368955,
+        "crps_no_peor": false,
+        "cobertura_en_rango": false,
+        "pasa": false,
+        "segundos": 82.2,
+        "sd_muestras": 438.03394242473854,
+        "sd_realizados": 367.4397566120238
+      },
+      "latente": {
+        "crps": 3.2914570284045714,
+        "cobertura_90": 0.24614197530864199,
+        "crps_vs_R0": 0.12748982497658057,
+        "crps_no_peor": false,
+        "cobertura_en_rango": false,
+        "pasa": false,
+        "segundos": 84.9,
+        "sd_muestras": 418.45279817755005,
+        "sd_realizados": 367.4397566120238
+      },
+      "_pasa": false,
+      "_fallas": [
+        "y",
+        "latente"
+      ]
+    }
+  },
+  "veredicto": {
+    "primer_fallo": "c3",
+    "escalon": "E2: difundir sobre la ventana futura de 36 dimensiones"
+  }
+}

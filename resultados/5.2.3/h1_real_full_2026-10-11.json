@@ -1,0 +1,149 @@
+{
+  "timestamp": "2026-10-11T19:39:08",
+  "entorno": {
+    "python": "3.12.0",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.2.5",
+    "plataforma": "Windows-10-10.0.19045-SP0",
+    "hilos": 1
+  },
+  "panel": "real",
+  "panel_forma": [
+    3,
+    264
+  ],
+  "config": {
+    "origen_inicial": 143,
+    "n_origenes": 109,
+    "M": 200,
+    "refit_cada": 12,
+    "steps": 400,
+    "eta": 5.0,
+    "semillas": [
+      0,
+      1,
+      2
+    ]
+  },
+  "semillas": {
+    "0": {
+      "principal_estandarizado": {
+        "crps_a": 5.896851505514353,
+        "crps_b": 5.610465944433936,
+        "reduccion": 0.04856584243517201,
+        "dm_hln": 1.6829061240370982,
+        "p": 0.04764103802181874,
+        "pasa": false
+      },
+      "robustez_suma_cruda": {
+        "reduccion": 0.02264744188242071,
+        "p": 0.31842401654331853,
+        "pasa": false
+      },
+      "atencion": {
+        "masa_prohibida_B": 0.6792289435863494,
+        "entropia_A": 0.9909399390220642,
+        "entropia_B": 0.9492521703243255
+      },
+      "descriptivo_por_serie": {
+        "cobre": {
+          "crps_a": 3.4371206726890717,
+          "crps_b": 3.6163441914345342,
+          "cambio_relativo": -0.052143504931191395
+        },
+        "USD/CLP": {
+          "crps_a": 6.430093714946812,
+          "crps_b": 5.999401690900819,
+          "cambio_relativo": 0.0669806760428461
+        },
+        "TPM": {
+          "crps_a": 7.823340128907184,
+          "crps_b": 7.215651950966453,
+          "cambio_relativo": 0.07767630806378055
+        }
+      }
+    },
+    "1": {
+      "principal_estandarizado": {
+        "crps_a": 5.968653343261499,
+        "crps_b": 5.5863184443474285,
+        "reduccion": 0.06405714604714305,
+        "dm_hln": 1.3813462150273117,
+        "p": 0.08501188871583154,
+        "pasa": false
+      },
+      "robustez_suma_cruda": {
+        "reduccion": 0.07892577087436176,
+        "p": 0.13504476884500383,
+        "pasa": false
+      },
+      "atencion": {
+        "masa_prohibida_B": 0.6763817548751831,
+        "entropia_A": 0.9908876359462738,
+        "entropia_B": 0.9468667387962342
+      },
+      "descriptivo_por_serie": {
+        "cobre": {
+          "crps_a": 3.3576974395925676,
+          "crps_b": 3.426981696983457,
+          "cambio_relativo": -0.020634455199541837
+        },
+        "USD/CLP": {
+          "crps_a": 6.610765349465581,
+          "crps_b": 5.734802100371128,
+          "cambio_relativo": 0.13250557277233665
+        },
+        "TPM": {
+          "crps_a": 7.937497240726334,
+          "crps_b": 7.597171535687697,
+          "cambio_relativo": 0.04287569427961077
+        }
+      }
+    },
+    "2": {
+      "principal_estandarizado": {
+        "crps_a": 5.723172546358154,
+        "crps_b": 5.715045398389142,
+        "reduccion": 0.001420042450787846,
+        "dm_hln": 0.04345254275034647,
+        "p": 0.4827105152749709,
+        "pasa": false
+      },
+      "robustez_suma_cruda": {
+        "reduccion": -0.08852399813438681,
+        "p": 0.9008256578476994,
+        "pasa": false
+      },
+      "atencion": {
+        "masa_prohibida_B": 0.6269003331661225,
+        "entropia_A": 0.9917356133460998,
+        "entropia_B": 0.940358179807663
+      },
+      "descriptivo_por_serie": {
+        "cobre": {
+          "crps_a": 3.299074596590122,
+          "crps_b": 3.790610215594598,
+          "cambio_relativo": -0.14899196869101441
+        },
+        "USD/CLP": {
+          "crps_a": 5.972885189671478,
+          "crps_b": 6.274779011318772,
+          "cambio_relativo": -0.050544052339954446
+        },
+        "TPM": {
+          "crps_a": 7.8975578528128825,
+          "crps_b": 7.079746968254052,
+          "cambio_relativo": 0.10355237654480108
+        }
+      }
+    }
+  },
+  "agregado": {
+    "reduccion_media": 0.038014343644367635,
+    "reduccion_desv": 0.026637721146078958,
+    "reduccion_min": 0.001420042450787846,
+    "reduccion_max": 0.06405714604714305,
+    "semillas_que_pasan": 0,
+    "n_semillas": 3
+  }
+}

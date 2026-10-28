@@ -1,0 +1,99 @@
+{
+  "timestamp": "2026-10-11T18:32:50",
+  "entorno": {
+    "python": "3.12.0",
+    "torch": "2.14.1+cpu",
+    "numpy": "2.2.5",
+    "plataforma": "Windows-10-10.0.19045-SP0",
+    "cuda": false
+  },
+  "config": {
+    "T_PANEL": 300,
+    "T0": 144,
+    "N_ORIGENES": 109,
+    "M_SAMPLES": 200,
+    "REFIT_CADA": 12,
+    "STEPS": 400,
+    "SEMILLAS": [
+      0,
+      1,
+      2
+    ],
+    "ETA": 5.0
+  },
+  "panel": "sintetico_causalidad_plantada",
+  "semillas": {
+    "0": {
+      "principal_estandarizado": {
+        "crps_a": 3.1306206097000095,
+        "crps_b": 3.2247661296688652,
+        "reduccion": -0.030072478178017593,
+        "dm_hln": -0.6921483875999566,
+        "p": 0.754835206095459,
+        "pasa": false
+      },
+      "robustez_suma_cruda": {
+        "reduccion": -0.04490090212200966,
+        "p": 0.8472735641463488,
+        "pasa": false
+      },
+      "atencion": {
+        "masa_prohibida_B": 0.4795321136713028,
+        "entropia_A": 0.9843793630599975,
+        "entropia_B": 0.9111611187458039,
+        "frac_estructural": 0.011442742845072289
+      }
+    },
+    "1": {
+      "principal_estandarizado": {
+        "crps_a": 3.358103251628225,
+        "crps_b": 3.429879639353073,
+        "reduccion": -0.021374086008238667,
+        "dm_hln": -0.5309069895825811,
+        "p": 0.701713334427716,
+        "pasa": false
+      },
+      "robustez_suma_cruda": {
+        "reduccion": -0.024873208608410313,
+        "p": 0.7238333021528744,
+        "pasa": false
+      },
+      "atencion": {
+        "masa_prohibida_B": 0.4880770266056061,
+        "entropia_A": 0.9922939777374268,
+        "entropia_B": 0.9107869565486908,
+        "frac_estructural": 0.010624387810834777
+      }
+    },
+    "2": {
+      "principal_estandarizado": {
+        "crps_a": 3.280893753569617,
+        "crps_b": 3.3010925846242176,
+        "reduccion": -0.006156502639752979,
+        "dm_hln": -0.22156363009913435,
+        "p": 0.5874640062698031,
+        "pasa": false
+      },
+      "robustez_suma_cruda": {
+        "reduccion": -0.01037992784196567,
+        "p": 0.6508050001218908,
+        "pasa": false
+      },
+      "atencion": {
+        "masa_prohibida_B": 0.5085565835237503,
+        "entropia_A": 0.9936242938041687,
+        "entropia_B": 0.9166279017925263,
+        "frac_estructural": 0.011105481982124597
+      }
+    }
+  },
+  "agregado": {
+    "reduccion_media": -0.019201022275336415,
+    "reduccion_desv": 0.009883829419044662,
+    "reduccion_min": -0.030072478178017593,
+    "reduccion_max": -0.006156502639752979,
+    "p_max": 0.754835206095459,
+    "semillas_que_pasan": 0,
+    "n_semillas": 3
+  }
+}
