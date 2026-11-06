@@ -44,7 +44,9 @@ Los cuadernos y sus datos de entrada comparten la carpeta `cuadernos/` porque lo
 | **§5.2.6 y §A.4** Re-contraste de H1 (Tabla 18) | `recontraste_h1_cambio.py` | `5.2.6/recontraste_h1_cambio_FASE1_2026-10-14.json`, `5.2.6/recontraste_h1_cambio_full_2026-10-14.json` |
 | **§5.4** Codificadores (Tabla 20) | `lineas_neuronales.py` | `5.4/neuronales_real_cambio_full_2026-10-13.json` |
 | **§6.2.2** Escalera de verificación de la difusión | `diag_difusion.py` (criterio C1) y `cabeza_difusion.py` (`schedule_coseno`) | `5.2.4/diag_difusion_full_2026-10-12.json` |
-| **§A.1** Prerregistro | — | `A.1/PREREGISTRO_H1.md` |
+| **§A.1** Prerregistro de H1 | — | `A.1/PREREGISTRO_H1.md` |
+| **Análisis complementario** Tamaño y potencia de Diebold–Mariano (Parte A) | — | `A.1/PREREGISTRO_BARRIDO_ParteA.md` (prerregistro) |
+| **Análisis complementario** Piloto declarado en la sección 7 del prerregistro anterior | `A.1/barrido_muestra.py` | `A.1/barrido_muestra_full_2026-10-14.json` |
 | **§A.3** Fuerza del prior | `medir_frac_real.py`, `eta_sensibilidad.py` | `A.3/eta_sensibilidad_real_full_2026-10-14.json`, `A.3/eta_sensibilidad_sintetico_full_2026-10-14.json` |
 
 ## Ejecución
@@ -93,7 +95,9 @@ Entorno de los contrastes: Python 3.12.0, PyTorch 2.14.1+cpu, NumPy 2.2.5, Windo
 - **R_G ejecutado frente al prerregistrado.** Los contrastes usan la función `R_G` de `bloques_h1.py`, no `rg_frobenius.py`. La proyección T×T → N×N es idéntica. La escala difiere en un factor constante: el R_G de `rg_frobenius.py` es exactamente 3 veces el de `bloques_h1.py`, porque uno promedia sobre las 9 entradas y el otro suma por fila y promedia sobre filas. Los valores de η del informe están en la escala de `bloques_h1.py`. Las fracciones estructurales no dependen de ese factor.
 - **`run_h1.py`** es la plantilla con calibración de η que, según documenta §A.3, nunca se ejecutó. Se publica tal cual, como evidencia de la desviación.
 - **Re-contraste en dos fases.** `recontraste_h1_cambio.py` escribe el archivo de la FASE 1, con el umbral fijado en 7,26 %, antes de comparar ningún CRPS. Ambos archivos llevan en el campo `timestamp` la hora de inicio de la ejecución. El orden entre las fases lo garantiza la estructura del guion: la FASE 2 no corre si la FASE 1 falla.
-- **Fechas de los prerregistros.** Los prerregistros se fijaron en las fechas indicadas en el Anexo A. Las fechas de los commits de este repositorio son las de publicación y no prueban la fecha de fijación.
+- **Fechas de los prerregistros.** Los prerregistros del Anexo A se fijaron en las fechas indicadas ahí. Las fechas de sus commits son las de publicación y no prueban la fecha de fijación.
+- **Prerregistro de la Parte A.** `resultados/A.1/PREREGISTRO_BARRIDO_ParteA.md` se fijó el 6 de noviembre de 2026 en el commit `19af5f2`, antes de ejecutar cualquier simulación. A diferencia de los anteriores, aquí la fecha del commit sí es la de fijación. El hash se registra en este README y no dentro del documento, porque un archivo no puede contener el hash del commit que lo guarda.
+- **Piloto del 14 de octubre.** `barrido_muestra.py` y su resultado se ejecutaron en el entorno del asistente de IA (Linux, Python 3.13), sobre el panel sintético exclusivamente. Se publican como evidencia de la declaración del prerregistro; no se usan como resultado del informe.
 
 ## Fuentes de datos
 
