@@ -48,6 +48,7 @@ Los cuadernos y sus datos de entrada comparten la carpeta `cuadernos/` porque lo
 | **Análisis complementario** Tamaño y potencia de Diebold–Mariano (Parte A) | — | `A.1/PREREGISTRO_BARRIDO_ParteA.md` (prerregistro) |
 | **Análisis complementario** Piloto declarado en la sección 7 del prerregistro anterior | `A.1/barrido_muestra.py` | `A.1/barrido_muestra_full_2026-10-14.json` |
 | **Análisis complementario** Resultado de la Parte A: tamaño y potencia de DM-HLN por simulación | `parteA_potencia.py` | `parteA/parteA_potencia_full_2026-11-06.json` |
+| **Análisis complementario** Equivalencia (TOST) sobre el resultado de H1 | `tost_h1.py` | `parteA/tost_h1.json` |
 | **§A.3** Fuerza del prior | `medir_frac_real.py`, `eta_sensibilidad.py` | `A.3/eta_sensibilidad_real_full_2026-10-14.json`, `A.3/eta_sensibilidad_sintetico_full_2026-10-14.json` |
 
 ## Ejecución
@@ -88,6 +89,9 @@ python codigo/lineas_neuronales.py --panel cuadernos/panel_2003_2024.csv
 
 # Análisis complementario, Parte A (solo panel sintético; ~15 min)
 python codigo/parteA_potencia.py
+
+# Análisis complementario, TOST sobre H1 (lee el JSON de §5.2.3; segundos)
+python codigo/tost_h1.py resultados/5.2.3/h1_real_full_2026-10-11.json
 ```
 
 Los guiones escriben sus resultados en la carpeta desde la que se ejecutan. Los de `resultados/` son los que produjeron las cifras del informe.
