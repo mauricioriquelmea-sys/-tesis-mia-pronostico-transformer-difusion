@@ -1,0 +1,152 @@
+{
+  "configuracion_reducida": true,
+  "pasos": 50,
+  "muestras": 50,
+  "timestamp": "2026-10-14T09:00:36",
+  "entorno": {
+    "python": "3.13.16",
+    "torch": "2.14.1+cu130",
+    "numpy": "2.5.3",
+    "plataforma": "Linux-6.18.44-fc-v114-x86_64-with-glibc2.39",
+    "hilos": 2
+  },
+  "panel": "sintetico",
+  "panel_seed": 12345,
+  "eta": "calibrado",
+  "objetivo": "nivel",
+  "n_origenes": 24,
+  "M": 200,
+  "refit": 12,
+  "steps": 400,
+  "semillas": [
+    0
+  ],
+  "auditoria": {
+    "48": {
+      "panel": 84,
+      "ventanas": 22
+    },
+    "144": {
+      "panel": 180,
+      "ventanas": 118
+    },
+    "486": {
+      "panel": 522,
+      "ventanas": 460
+    }
+  },
+  "nota": "exploratorio; responde la pregunta abierta de la regularidad contraintuitiva, no re-contrasta H1",
+  "tamanos": {
+    "48": {
+      "semillas": {
+        "0": {
+          "t0": 48,
+          "semilla": 0,
+          "eta": 79.78004131055741,
+          "crps_a": 4.445233482175727,
+          "crps_b": 4.7131909837439965,
+          "reduccion": -0.06027973618094799,
+          "dm": {
+            "n": 24,
+            "mean_diff": -0.2679575015682694,
+            "dm": -1.367270343726488,
+            "dm_hln": -0.7115500466534506,
+            "p_one_sided": 0.7580507590217579,
+            "nw_lag": 11
+          },
+          "n_ventanas": 22,
+          "frac_estructural": 0.19562752154956578,
+          "R_G_final": 0.004735816502943635
+        }
+      },
+      "calibracion_eta": {
+        "L_simple": 37.03781509399414,
+        "R_G": 0.11606228351593018,
+        "eta": 79.78004131055741,
+        "objetivo": 0.2
+      },
+      "eta": 79.78004131055741,
+      "reduccion_media": -0.06027973618094799,
+      "reduccion_desv": 0.0,
+      "frac_estructural_media": 0.19562752154956578
+    },
+    "144": {
+      "semillas": {
+        "0": {
+          "t0": 144,
+          "semilla": 0,
+          "eta": 111.56265700962955,
+          "crps_a": 2.5261042631727677,
+          "crps_b": 2.17317569561491,
+          "reduccion": 0.13971258934284125,
+          "dm": {
+            "n": 24,
+            "mean_diff": 0.3529285675578575,
+            "dm": 2.432541307967512,
+            "dm_hln": 1.265934633273211,
+            "p_one_sided": 0.10910478803257229,
+            "nw_lag": 11
+          },
+          "n_ventanas": 118,
+          "frac_estructural": 0.20137609917269494,
+          "R_G_final": 0.0022043983917683363
+        }
+      },
+      "calibracion_eta": {
+        "L_simple": 50.910926818847656,
+        "R_G": 0.11408594995737076,
+        "eta": 111.56265700962955,
+        "objetivo": 0.2
+      },
+      "eta": 111.56265700962955,
+      "reduccion_media": 0.13971258934284125,
+      "reduccion_desv": 0.0,
+      "frac_estructural_media": 0.20137609917269494
+    },
+    "486": {
+      "semillas": {
+        "0": {
+          "t0": 486,
+          "semilla": 0,
+          "eta": 114.0288795683838,
+          "crps_a": 1.1797550736563849,
+          "crps_b": 1.3399623556710307,
+          "reduccion": -0.1357970697410264,
+          "dm": {
+            "n": 24,
+            "mean_diff": -0.1602072820146458,
+            "dm": -2.2802560209296545,
+            "dm_hln": -1.186682857211799,
+            "p_one_sided": 0.8762669765738318,
+            "nw_lag": 11
+          },
+          "n_ventanas": 460,
+          "frac_estructural": 0.2002521025816439,
+          "R_G_final": 0.0020854033064097166
+        }
+      },
+      "calibracion_eta": {
+        "L_simple": 51.793701171875,
+        "R_G": 0.11355391144752502,
+        "eta": 114.0288795683838,
+        "objetivo": 0.2
+      },
+      "eta": 114.0288795683838,
+      "reduccion_media": -0.1357970697410264,
+      "reduccion_desv": 0.0,
+      "frac_estructural_media": 0.2002521025816439
+    }
+  },
+  "ancla": {
+    "corrida": false,
+    "motivo": "configuracion reducida"
+  },
+  "control_prior": {
+    "razon_max_min": 1.0293853215416455,
+    "comparable": true
+  },
+  "tendencia": {
+    "pendiente_log": -0.03607309033481673,
+    "cambia_de_signo": true
+  }
+}
