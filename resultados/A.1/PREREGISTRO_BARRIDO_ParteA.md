@@ -72,7 +72,16 @@ Fuera de la banda de tamaño, la prueba se reporta como sobre- o sub-rechazante.
 
 **Parte B (efecto de R_G en muestra escasa).** El borrador de prerregistro contemplaba una Parte B con 720 entrenamientos sobre el generador sintético. **No se ejecuta en este período** por presupuesto de tiempo, y queda como trabajo futuro (§7.6). Si se retoma, requiere un prerregistro propio con sus decisiones pendientes: configuración principal, presupuesto de cómputo y viabilidad del mínimo de 60 meses.
 
-**Desviaciones posteriores a la fijación:** (ninguna a la fecha)
+**Desviaciones y precisiones posteriores a la fijación**
+
+*6 de noviembre de 2026, antes de la ejecución completa (R = 2.000).*
+
+1. **Prueba funcional del código.** Para verificar `codigo/parteA_potencia.py` se corrieron pruebas reducidas en el entorno del asistente de IA, solo sobre el generador sintético (R = 40, 200 y 12). No se reportan como resultado. Se declara que la prueba con R = 200 dio, bajo la nula, tasas de rechazo entre 6,5 % y 9 % según el número de orígenes (error de Monte Carlo cercano a 1,9 puntos con ese R), es decir, un indicio preliminar de sobre-rechazo visto antes de la corrida completa. Las reglas de la sección 6 no se modifican por ello.
+2. **Celda δ = 0.** La primera prueba mostró que, si A y B son el mismo oráculo, el diferencial de pérdidas es idénticamente nulo y la prueba nunca rechaza: la celda no mide el tamaño. Se corrige así: bajo la nula se comparan dos versiones del oráculo con igual CRPS esperado, B subdispersa (factor 0,8) y A sobredispersa (factor tal que su CRPS esperado iguala al de B). Las celdas con δ > 0 no cambian: B es el oráculo exacto y A el oráculo con dispersión inflada.
+3. **Paneles anidados.** Cada réplica genera un panel de 144 + 450 + 12 meses, y las celdas con menos orígenes usan sus primeros O orígenes. Cada celda conserva R paneles independientes.
+4. **CRPS.** Se calcula con la identidad de muestras ordenadas, que da el mismo valor que `h1_harness.crps_ensemble` (verificado al inicio de cada ejecución) sin construir el tensor (O, H, N, M, M).
+5. **Lectura de la regla 2.** La pendiente se estima para cada δ; la regla se sostiene si todas caen en la banda.
+6. **Lectura de la regla 3.** Si la potencia no cruza 50 % u 80 % dentro de la grilla para un δ, ese δ se reporta como no identificable y no entra en la regla. Si ningún δ es identificable, la regla se reporta como no evaluable con esta grilla. Como lectura descriptiva, fuera de la regla, se reportan δ₈₀/δ₅₀ interpolado en δ y δ₈₀ dividido por el efecto crítico mediano, para cada O.
 
 ## 8. Qué se reporta siempre
 
