@@ -49,6 +49,9 @@ Los cuadernos y sus datos de entrada comparten la carpeta `cuadernos/` porque lo
 | **Análisis complementario** Piloto declarado en la sección 7 del prerregistro anterior | `A.1/barrido_muestra.py` | `A.1/barrido_muestra_full_2026-10-14.json` |
 | **Análisis complementario** Resultado de la Parte A: tamaño y potencia de DM-HLN por simulación | `parteA_potencia.py` | `parteA/parteA_potencia_full_2026-11-06.json` |
 | **Análisis complementario** Equivalencia (TOST) sobre el resultado de H1 | `tost_h1.py` | `parteA/tost_h1.json` |
+| **Análisis complementario** Prerregistro del Variogram Score | — | `A.1/PREREGISTRO_VS.md` |
+| **Análisis complementario** Variogram Score de A frente a B, configuración del re-contraste | `vs_h1.py` | `parteA/vs_h1_recontraste_full_2026-11-13.json` |
+| **Análisis complementario** Variogram Score de A frente a B, configuración del H1 original | `vs_h1.py --config h1` | `parteA/vs_h1_h1_full_2026-11-13.json` |
 | **§A.3** Fuerza del prior | `medir_frac_real.py`, `eta_sensibilidad.py` | `A.3/eta_sensibilidad_real_full_2026-10-14.json`, `A.3/eta_sensibilidad_sintetico_full_2026-10-14.json` |
 
 ## Ejecución
@@ -92,6 +95,10 @@ python codigo/parteA_potencia.py
 
 # Análisis complementario, TOST sobre H1 (lee el JSON de §5.2.3; segundos)
 python codigo/tost_h1.py resultados/5.2.3/h1_real_full_2026-10-11.json
+
+# Análisis complementario, Variogram Score de A frente a B (~45 min cada uno)
+python codigo/vs_h1.py --panel cuadernos/panel_2003_2024.csv
+python codigo/vs_h1.py --panel cuadernos/panel_2003_2024.csv --config h1
 ```
 
 Los guiones escriben sus resultados en la carpeta desde la que se ejecutan. Los de `resultados/` son los que produjeron las cifras del informe.
@@ -105,6 +112,7 @@ Entorno de los contrastes: Python 3.12.0, PyTorch 2.14.1+cpu, NumPy 2.2.5, Windo
 - **Re-contraste en dos fases.** `recontraste_h1_cambio.py` escribe el archivo de la FASE 1, con el umbral fijado en 7,26 %, antes de comparar ningún CRPS. Ambos archivos llevan en el campo `timestamp` la hora de inicio de la ejecución. El orden entre las fases lo garantiza la estructura del guion: la FASE 2 no corre si la FASE 1 falla.
 - **Fechas de los prerregistros.** Los prerregistros del Anexo A se fijaron en las fechas indicadas ahí. Las fechas de sus commits son las de publicación y no prueban la fecha de fijación.
 - **Prerregistro de la Parte A.** `resultados/A.1/PREREGISTRO_BARRIDO_ParteA.md` se fijó el 6 de noviembre de 2026 en el commit `19af5f2`, antes de ejecutar cualquier simulación. A diferencia de los anteriores, aquí la fecha del commit sí es la de fijación. El hash se registra en este README y no dentro del documento, porque un archivo no puede contener el hash del commit que lo guarda.
+- **Prerregistro del Variogram Score.** `resultados/A.1/PREREGISTRO_VS.md` se redactó el 11 de noviembre de 2026 (fecha que figura en el documento) y se publicó el 13 de noviembre en el commit `0e4306c`, antes del guion `vs_h1.py` (commit `e380318`) y de la primera ejecución completa (18:21). El documento no se modificó después de ejecutar. El guion verifica que el CRPS recalculado coincida con el publicado, y coincidió en las tres semillas de ambas configuraciones.
 - **Piloto del 14 de octubre.** `barrido_muestra.py` y su resultado se ejecutaron en el entorno del asistente de IA (Linux, Python 3.13), sobre el panel sintético exclusivamente. Se publican como evidencia de la declaración del prerregistro; no se usan como resultado del informe.
 
 ## Fuentes de datos
